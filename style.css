@@ -1,0 +1,27 @@
+#calculator {
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 50px;
+    border: solid gold 2px;
+  }
+  
+  #buttons {
+    border: solid red 2px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+  
+  button {
+    padding: 15px;
+    font-size: 50px;
+  }
+  
+  
