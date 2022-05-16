@@ -1,9 +1,70 @@
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll('button');
 let a1 = null;
-
+let a2 = null
 let operator = "";
 let waitingForSecondOperator = false;
+let decimalPresent = false;
+
+
+
+function input(value) {
+  if ( isNaN(value)===false) {
+      i = value;
+      display.innerHTML += i;
+  } 
+  if (waitingForSecondOperator===false && ((value ==="+") || (value ==="-") || (value==="*") || (value === "/"))) {
+      operator= value;
+      a1= display.innerHTML;
+      waitingForSecondOperator= true;
+      display.innerHTML="";
+      decimalPresent=false;
+  }   else if ( waitingForSecondOperator===true && ((value ==="+") || (value ==="-") || (value==="*") || (value === "/"))) {     
+      a1 = operate(a1,display.innerHTML,operator);
+      display.innerHTML=a1;
+      operator = value;
+      display.innerHTML="";
+      decimalPresent=false;
+  }   else if (value=== "="&& waitingForSecondOperator==true) {
+      display.innerHTML = operate(a1,display.innerHTML,operator);
+      waitingForSecondOperator= false;
+      decimalPresent=false;
+  } else if (value==="false") {
+    clear();
+  } else if (value ==="." && decimalPresent===false) {
+    display.innerHTML += "."
+    decimalPresent = true;
+  } else if (value==="delete") {
+    display.innerHTML= display.innerHTML.slice(0,-1);
+  } console.log(value);
+};
+
+
+function operate (num1,num2,symbol) {
+  if (symbol == "+") {
+    result= Number(num1)+Number(num2);
+    return Math.round(result*100)/100;
+  } else if (symbol == "-") {
+    result= Number(num1)-Number(num2);
+    return Math.round(result*100)/100;
+  } else if (symbol == "*") {
+    result= Number(num1)*Number(num2);
+    return Math.round(result*100)/100;
+  } else if (symbol == "/") {
+    result= Number(num1)/Number(num2);
+    return Math.round(result*100)/100;
+  }
+};
+
+function clear() {
+  a1 = null;
+  operator = "";
+  waitingForSecondOperator = false;
+  display.innerHTML="";
+  decimalPresent=false;
+};
+
+
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -75,37 +136,9 @@ window.onkeydown = function(e) {
       choice = document.querySelector("#equals")
       choice.click();
       break;
-  }
-};
-
-function input(value) {
-    if ( isNaN(value)===false) {
-        i = value;
-        display.innerHTML += i;
-    }
-    if (a1!== null) {
-        waitingForSecondOperator =true;
-    } else if (!waitingForSecondOperator && ((value ==="+") || (value ==="-") || (value==="*") || (value === "/"))) {
-        operator= value;
-        a1= display.innerHTML;
-    }   else if ( waitingForSecondOperator===true && ((value ==="+") || (value ==="-") || (value==="*") || (value === "/"))) {
-        operator = value;
-        a1 = operate(a1,display,innerHTML,operator);
-        display.innerHTML = a1;
-    }   else if (waitingForSecondOperator===true && value=== "=") {
-        a1 = operate(a1,display,innerHTML,operator);
-        display.innerHTML = a1;
-    }
-};
-
-function operate (num1,num2,symbol) {
-  if (symbol == "+") {
-    return num1+num2;
-  } else if (symbol == "-") {
-    return num1-num2;
-  } else if (symbol == "*") {
-    return num1*num2;
-  } else if (symbol == "/") {
-    return num1/num2;
+      case ".":
+        choice = document.querySelector("#decimal")
+        choice.click();
+        break;
   }
 };

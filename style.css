@@ -1,7 +1,16 @@
+body {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #calculator {
     border: solid black 2px;
     display: flex;
     flex-direction: column;
+    max-width: 400px;
+    max-height: 600px;
   }
   
   #display {
@@ -24,4 +33,7 @@
     font-size: 50px;
   }
   
+  .operator {
+    background-color: lightblue;
+  }
   
