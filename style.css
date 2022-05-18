@@ -11,29 +11,72 @@ body {
     flex-direction: column;
     max-width: 400px;
     max-height: 600px;
+    padding: 10px;
+    background-color: grey;
+    border-radius: 10px;
   }
-  
+
+#screen {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  border: solid white 2px;
+  background-color: silver;
+  border-radius: 2px;
+}
+
   #display {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    min-height: 50px;
-    border: solid gold 2px;
+    min-height: 40px;
+    
+    padding-right: 5px;
+    font-size: 25px;
+ 
+    color: black;
+    text-shadow: 2px 1px 3px gold;
+  }
+
+#miniDisplay {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 20px;
+    padding-right: 5px;
+    font-size: 10px;
+    color: black;
+    text-shadow: 2px 1px 3px red;
   }
   
   #buttons {
-    border: solid red 2px;
+    padding-top: 5px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    gap: 5px 5px;
   }
-  
+
   button {
-    padding: 15px;
-    font-size: 50px;
+    background-color: lightgrey;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 7px;
   }
   
   .operator {
     background-color: lightblue;
   }
-  
+
+#clear {
+  grid-column: 1/ span 2;
+}
+
+#delete {
+  grid-column: 3/ span 2;
+}
+
+#equals {
+  background-color: maroon; 
+}

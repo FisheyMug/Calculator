@@ -1,5 +1,6 @@
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll('button');
+const miniDisplay = document.getElementById("miniDisplay");
 let a1 = null;
 let a2 = null
 let operator = "";
@@ -9,6 +10,10 @@ let decimalPresent = false;
 
 
 function input(value) {
+  if (waitingForSecondOperator===false&& value!="delete") {
+  x = value;
+  miniDisplay.innerHTML += x;
+  } 
   if ( isNaN(value)===false) {
       i = value;
       display.innerHTML += i;
@@ -25,10 +30,16 @@ function input(value) {
       operator = value;
       display.innerHTML="";
       decimalPresent=false;
+      miniDisplay.innerHTML=a1 + operator;
   }   else if (value=== "="&& waitingForSecondOperator==true) {
+      if (display.innerHTML==0 && operator ==="/") {
+        clear();
+        alert("C'mon Bro!!! Clearing the calculator because you be trying to divide by Zero!!!")
+      } else
       display.innerHTML = operate(a1,display.innerHTML,operator);
       waitingForSecondOperator= false;
       decimalPresent=false;
+      miniDisplay.innerHTML =display.innerHTML;
   } else if (value==="false") {
     clear();
   } else if (value ==="." && decimalPresent===false) {
@@ -36,6 +47,7 @@ function input(value) {
     decimalPresent = true;
   } else if (value==="delete") {
     display.innerHTML= display.innerHTML.slice(0,-1);
+    
   } console.log(value);
 };
 
@@ -62,6 +74,7 @@ function clear() {
   waitingForSecondOperator = false;
   display.innerHTML="";
   decimalPresent=false;
+  miniDisplay.innerHTML="";
 };
 
 
@@ -140,5 +153,9 @@ window.onkeydown = function(e) {
         choice = document.querySelector("#decimal")
         choice.click();
         break;
+    case "Backspace": 
+      choice = document.querySelector("#delete")
+      choice.click();
+      break;
   }
 };
